@@ -50,5 +50,5 @@ data class Result(val x: Double, val y: Double, val iterations: Int, val methodN
     private val xStringed: String = String.format("%.6f", x)
     private val yStringed: String = String.format("%.6f", y)
 
-    override fun toString() = "$methodName, \nx = $xStringed, y = $yStringed, there was $iterations iterations."
+    override fun toString() = "$methodName: \nx = $xStringed, y = $yStringed, there was $iterations iterations."
 }
