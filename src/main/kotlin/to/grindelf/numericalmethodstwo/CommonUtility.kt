@@ -13,28 +13,28 @@ object CommonUtility {
 
     fun secondFunction(x: Double, y: Double) = x * x - y * y - 0.75
 
-    fun jacobian(x: Double, y: Double, partialDerivative: Boolean) = Jacobian(
-        firstDerivativeByX(x, y, partialDerivative), firstDerivativeByY(x, y, partialDerivative),
-        secondDerivativeByX(x, y, partialDerivative), secondDerivativeByY(x, y, partialDerivative)
+    fun jacobian(x: Double, y: Double, numericalDerivatives: Boolean) = Jacobian(
+        firstDerivativeByX(x, y, numericalDerivatives), firstDerivativeByY(x, y, numericalDerivatives),
+        secondDerivativeByX(x, y, numericalDerivatives), secondDerivativeByY(x, y, numericalDerivatives)
     )
 
-    private fun firstDerivativeByX(x: Double, y: Double, partialDerivative: Boolean) = when {
-        partialDerivative -> (firstFunction(x + STEP, y) - firstFunction(x, y)) / STEP
+    private fun firstDerivativeByX(x: Double, y: Double, numericalDerivatives: Boolean) = when {
+        numericalDerivatives -> (firstFunction(x + STEP, y) - firstFunction(x, y)) / STEP
         else -> cos(x - y) - y
     }
 
-    private fun firstDerivativeByY(x: Double, y: Double, partialDerivative: Boolean) = when {
-        partialDerivative -> (firstFunction(x, y + STEP) - firstFunction(x, y)) / STEP
+    private fun firstDerivativeByY(x: Double, y: Double, numericalDerivatives: Boolean) = when {
+        numericalDerivatives -> (firstFunction(x, y + STEP) - firstFunction(x, y)) / STEP
         else -> -cos(x - y) - x
     }
 
-    private fun secondDerivativeByX(x: Double, y: Double, partialDerivative: Boolean) = when {
-        partialDerivative -> (secondFunction(x + STEP, y) - secondFunction(x, y)) / STEP
+    private fun secondDerivativeByX(x: Double, y: Double, numericalDerivatives: Boolean) = when {
+        numericalDerivatives -> (secondFunction(x + STEP, y) - secondFunction(x, y)) / STEP
         else -> 2 * x
     }
 
-    private fun secondDerivativeByY(x: Double, y: Double, partialDerivative: Boolean) = when {
-        partialDerivative -> (secondFunction(x, y + STEP) - secondFunction(x, y)) / STEP
+    private fun secondDerivativeByY(x: Double, y: Double, numericalDerivatives: Boolean) = when {
+        numericalDerivatives -> (secondFunction(x, y + STEP) - secondFunction(x, y)) / STEP
         else -> -2 * y
     }
 }

@@ -6,8 +6,8 @@ import to.grindelf.numericalmethodstwo.CommonUtility.jacobian
 import to.grindelf.numericalmethodstwo.CommonUtility.secondFunction
 import kotlin.math.abs
 
-object NewtonsMethod{
-    fun solution(xStart: Double, yStart: Double, partialDerivative: Boolean = false): Result {
+object NewtonsMethod {
+    fun solution(xStart: Double, yStart: Double, numericalDerivatives: Boolean = false): Result {
         var x = xStart
         var y = yStart
         var counter = 0
@@ -18,15 +18,15 @@ object NewtonsMethod{
         do {
             x = xNext
             y = yNext
-            jacobian = jacobian(x, y, partialDerivative)
+            jacobian = jacobian(x, y, numericalDerivatives)
             xNext = getNextX(x, y, jacobian)
             yNext = getNextY(x, y, jacobian)
             counter++
         } while (iterationIsPossible(x, xNext, y, yNext))
 
         return when {
-            partialDerivative -> Result(x, y, counter, "Newton's method with analytic partial derivative")
-            else -> Result(x, y, counter, "Newton's method with numeric partial derivative")
+            numericalDerivatives -> Result(x, y, counter, "Newton's method with numerical partial derivative")
+            else -> Result(x, y, counter, "Newton's method with analytical partial derivative")
         }
     }
 
