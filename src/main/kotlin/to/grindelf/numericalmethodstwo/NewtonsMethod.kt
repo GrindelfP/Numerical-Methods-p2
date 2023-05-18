@@ -10,7 +10,7 @@ object NewtonsMethod{
     fun solution(xStart: Double, yStart: Double, partialDerivative: Boolean = false): Result {
         var x = xStart
         var y = yStart
-        var counter = -1 // -1 because first iteration is iteration's initialization
+        var counter = 0
         var jacobian: Jacobian
         var xNext = x
         var yNext = y
