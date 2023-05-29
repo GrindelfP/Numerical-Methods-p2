@@ -13,9 +13,17 @@ class EquationSystemSolvingTest {
 
     @Test
     fun `GIVEN functions WHEN Newtons analytic derivative method is applied THEN solution is returned`() {
-        xesStart.zip(ysStart).forEachIndexed{ index, (xStart, yStart) ->
+        xesStart.zip(ysStart).forEachIndexed { index, (xStart, yStart) ->
             val solution = solution(xStart, yStart)
-            println(solution)
+            println(
+                "$solution The functions: f(x, y) = ${
+                    String.format(
+                        "%.6f",
+                        CommonUtility.firstFunction(solution.x, solution.y)
+                    )
+                }, " +
+                        "g(x, y) = ${String.format("%.6f", CommonUtility.secondFunction(solution.x, solution.y))}"
+            )
 
             assertThat(solution.x).isBetween(xesResultIntervals[index].min(), xesResultIntervals[index].max())
             assertThat(solution.y).isBetween(ysResultInterval[index].min(), ysResultInterval[index].max())
@@ -24,11 +32,20 @@ class EquationSystemSolvingTest {
 
     @Test
     fun `GIVEN functions WHEN Newtons numeric derivative method is applied THEN solution is returned`() {
-        xesStart.zip(ysStart).forEachIndexed{ index, (xStart, yStart) ->
+        xesStart.zip(ysStart).forEachIndexed { index, (xStart, yStart) ->
             val solution = solution(xStart, yStart, true)
-            println(solution)
+            println(
+                "$solution The functions: f(x, y) = ${
+                    String.format(
+                        "%.6f",
+                        CommonUtility.firstFunction(solution.x, solution.y)
+                    )
+                }, " +
+                        "g(x, y) = ${String.format("%.6f", CommonUtility.secondFunction(solution.x, solution.y))}"
+            )
 
             assertThat(solution.x).isBetween(xesResultIntervals[index].min(), xesResultIntervals[index].max())
             assertThat(solution.y).isBetween(ysResultInterval[index].min(), ysResultInterval[index].max())
         }
-    }}
+    }
+}
